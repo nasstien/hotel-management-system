@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
+
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" spacing="10" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.GetOnePageController">
+    <Label fx:id="headingLabel" styleClass="heading" />
+    <ComboBox fx:id="idField" focusTraversable="false" maxWidth="-Infinity" prefHeight="36.0" prefWidth="250.0" />
+    <Button mnemonicParsing="false" text="Get" onAction="#handleGetClick" />
+    <Button mnemonicParsing="false" text="Back" onAction="#handleBackClick" />
+</VBox>

@@ -1,0 +1,118 @@
+.text-field, .password-field, .combo-box, .button {
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
+}
+
+.text-field, .password-field {
+    -fx-padding: 8 10;
+    -fx-pref-width: 250px;
+}
+
+.text-area {
+    -fx-font-size: 14px;
+    -fx-pref-width: 250px;
+    -fx-pref-height: 150px;
+}
+
+.check-box .box {
+    -fx-background-radius: 5;
+}
+
+.combo-box {
+    -fx-padding: 3 3;
+    -fx-pref-width: 250px;
+}
+
+.button {
+    -fx-background-color: linear-gradient(to bottom, #1a84fa, #0152dc);
+    -fx-text-fill: white;
+    -fx-padding: 8 15;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-cursor: HAND;
+    -fx-background-color: #0152dc;
+}
+
+.delete-button {
+    -fx-background-color: linear-gradient(to bottom, #dc143c, #c22e2e);
+}
+
+.delete-button:hover {
+    -fx-cursor: HAND;
+    -fx-background-color: #c22e2e;
+}
+
+.date-picker {
+    -fx-pref-width: 250px;
+}
+
+.date-picker .text-field {
+    -fx-padding: 8 10;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+}
+
+.date-picker .arrow-button {
+    -fx-cursor: HAND;
+    -fx-padding: 8 10;
+}
+
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+    -fx-background-color: white;
+}
+
+.hyperlink {
+    -fx-text-fill: black;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #525252;
+}
+
+.table-view {
+    -fx-font-size: 14px;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+}
+
+.heading {
+    -fx-padding: 0 0 10 0;
+    -fx-font-size: 24px;
+}
+
+.large-text {
+    -fx-font-size: 24px;
+}
+
+.medium-text {
+    -fx-font-size: 16px;
+}
+
+.small-text {
+    -fx-font-size: 14px;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-weight: normal;
+}
+
+.menu-button:hover {
+    -fx-background-color: #e1e1e1;
+}
+
+.income-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+}
+
+.line-label {
+    -fx-font-size: 14px;
+}

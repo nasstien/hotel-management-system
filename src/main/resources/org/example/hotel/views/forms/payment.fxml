@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.geometry.Insets?>
+
+<VBox stylesheets="@../../styles.css" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.CreatePageController">
+    <VBox.margin>
+        <Insets left="475" right="475" />
+    </VBox.margin>
+    <ComboBox fx:id="guestIdField" promptText="Guest ID" focusTraversable="false" />
+    <ComboBox fx:id="roomIdField" promptText="Room ID" focusTraversable="false" />
+    <ComboBox fx:id="serviceIdField" promptText="Service ID" focusTraversable="false" />
+    <ComboBox fx:id="paymentMethodField" promptText="Payment Method" focusTraversable="false" />
+    <CheckBox fx:id="isPaidCheckBox" styleClass="small-text" text="Paid" focusTraversable="false" />
+</VBox>

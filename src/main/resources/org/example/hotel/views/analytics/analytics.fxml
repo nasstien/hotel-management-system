@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox alignment="CENTER" prefHeight="500" prefWidth="900" spacing="10.0" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.AnalyticsController">
+   <Label styleClass="heading" text="Analytics" />
+   <Button prefWidth="300.0" mnemonicParsing="false" text="Get Guests By Service Order" onAction="#handleGetGuestsByServiceOrderClick" />
+   <Button prefWidth="300.0" mnemonicParsing="false" text="Get Users By Email Domain" onAction="#handleGetUsersByEmailDomainClick" />
+   <Button prefWidth="300.0" mnemonicParsing="false" text="Get Payments By Date Interval" onAction="#handleGetPaymentsByDateIntervalClick" />
+   <Button prefWidth="300.0" mnemonicParsing="false" text="Get Hotel Week Income" onAction="#handleGetHotelWeekIncomeClick" />
+   <Button prefWidth="300.0" mnemonicParsing="false" text="Get Guests Per Service" onAction="#handleGetGuestsPerServiceClick" />
+   <Button prefWidth="300.0" mnemonicParsing="false" text="Get Highest Paid Employees By Position" onAction="#handleGetHighestPaidEmployeesByPositionClick" />
+   <Button prefWidth="300.0" mnemonicParsing="false" text="Get Max Price Per Service Category" onAction="#handleGetMaxPricePerServiceCategoryClick" />
+   <Button prefWidth="300.0" mnemonicParsing="false" text="Get Unordered Services By Date Interval" onAction="#handleGetUnorderedServicesByDateIntervalClick" />
+   <Button prefWidth="300.0" mnemonicParsing="false" text="Get All Guests With Comments" onAction="#handleGetGuestsWithCommentsClick" />
+</VBox>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.MainMenuController">
+    <GridPane fx:id="gridPane" alignment="CENTER" prefHeight="700.0" prefWidth="1200.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="494.0" minWidth="197.0" prefWidth="222.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1003.0" minWidth="505.0" prefWidth="977.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS" />
+        </rowConstraints>
+    </GridPane>
+</VBox>

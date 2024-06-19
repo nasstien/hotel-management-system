@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.layout.HBox?>
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" spacing="10.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.SettingsController">
+    <Label styleClass="heading" text="Settings" />
+    <VBox alignment="CENTER" spacing="10.0">
+        <VBox.margin>
+            <Insets left="475" right="475" />
+        </VBox.margin>
+        <TextField fx:id="firstNameField" focusTraversable="false" />
+        <TextField fx:id="lastNameField" focusTraversable="false" />
+        <TextField fx:id="emailField" focusTraversable="false" />
+        <TextField fx:id="phoneNumField" focusTraversable="false" />
+        <TextField fx:id="passportNumField" focusTraversable="false" />
+        <TextField fx:id="positionField" focusTraversable="false" />
+        <TextField fx:id="salaryField" focusTraversable="false" />
+        <PasswordField fx:id="passwordField" promptText="Password" focusTraversable="false" />
+        <PasswordField fx:id="passwordConfirmField" promptText="Confirm Your Password" focusTraversable="false" />
+    </VBox>
+    <HBox alignment="CENTER" spacing="10.0">
+        <Button text="Back" onAction="#handleBackClick"/>
+        <Button text="Save" onAction="#handleSaveClick"/>
+    </HBox>
+    <Button styleClass="delete-button" text="Delete Account" onAction="#handleDeleteClick"/>
+</VBox>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.geometry.Insets?>
+
+<VBox stylesheets="@../../styles.css" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.CreatePageController">
+    <VBox.margin>
+        <Insets left="475" right="475" />
+    </VBox.margin>
+    <TextField fx:id="nameField" promptText="Type Name" focusTraversable="false" />
+    <TextArea fx:id="descriptionField" promptText="Description" focusTraversable="false" />
+    <TextField fx:id="priceField" promptText="Price Per Night (UAH)" focusTraversable="false" />
+    <TextField fx:id="capacityField" promptText="Capacity" focusTraversable="false" />
+</VBox>

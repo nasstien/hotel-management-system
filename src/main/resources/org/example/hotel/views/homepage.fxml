@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<VBox alignment="CENTER" prefHeight="400" prefWidth="400" spacing="10.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.HomePageController">
+   <ImageView fitHeight="140.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../icons/icon.png" />
+   </ImageView>
+   <Label fx:id="welcomeLabel" styleClass="large-text" text="Welcome" />
+   <Label fx:id="positionLabel" styleClass="medium-text" text="user info" />
+</VBox>

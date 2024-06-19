@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.geometry.Insets?>
+
+<VBox stylesheets="@../../styles.css" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.CreatePageController">
+    <VBox.margin>
+        <Insets left="475" right="475" />
+    </VBox.margin>
+    <ComboBox fx:id="typeIdField" promptText="Type ID" focusTraversable="false" />
+</VBox>
