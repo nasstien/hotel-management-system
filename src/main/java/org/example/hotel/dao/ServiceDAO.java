@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 import java.util.List;
 
-import static org.example.hotel.Application.database;
 import static org.example.hotel.Application.hotel;
+import static org.example.hotel.Application.database;
 
 public class ServiceDAO extends BaseDAO<Service> {
     @Override
@@ -86,13 +86,15 @@ public class ServiceDAO extends BaseDAO<Service> {
     }
 
     public List<Object[]> getMaxPricePerServiceCategory() {
-        String sql = "SELECT * FROM get_max_price_per_service_category() " +
+        String sql = "SELECT * FROM get_max_price_per_service_category(?) " +
                      "ORDER BY max_price DESC";
-        return database.getColumnRows(sql, null);
+        List<Object> params = List.of(new HotelDAO().getId(hotel));
+        return database.getColumnRows(sql, params);
     }
 
     public List<Object[]> getUnorderedServicesByDateInterval(String interval) {
-        String sql = STR."SELECT * FROM get_unordered_services_by_date_interval('1 \{interval}')";
-        return database.getColumnRows(sql, null);
+        String sql = STR."SELECT * FROM get_unordered_services_by_date_interval(?, '1 \{interval}')";
+        List<Object> params = List.of(new HotelDAO().getId(hotel));
+        return database.getColumnRows(sql, params);
     }
 }

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import static org.example.hotel.Application.hotel;
 import static org.example.hotel.Application.database;
 
 public class PaymentDAO extends BaseDAO<Payment> {
@@ -67,8 +68,12 @@ public class PaymentDAO extends BaseDAO<Payment> {
     }
 
     public List<Object[]> getPaymentsByDateInterval(Date startDate, Date endDate) {
-        String sql = "SELECT * FROM get_payments_by_date_interval(?, ?)";
-        List<Object> params = List.of(new java.sql.Date(startDate.getTime()), new java.sql.Date(endDate.getTime()));
+        String sql = "SELECT * FROM get_payments_by_date_interval(?, ?, ?)";
+        List<Object> params = List.of(
+                new HotelDAO().getId(hotel),
+                new java.sql.Date(startDate.getTime()),
+                new java.sql.Date(endDate.getTime())
+        );
         return database.getColumnRows(sql, params);
     }
 }

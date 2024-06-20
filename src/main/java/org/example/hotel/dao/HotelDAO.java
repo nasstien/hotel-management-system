@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import java.util.List;
 
+import static org.example.hotel.Application.hotel;
 import static org.example.hotel.Application.database;
 
 public class HotelDAO extends BaseDAO<Hotel> {
@@ -70,8 +71,9 @@ public class HotelDAO extends BaseDAO<Hotel> {
     }
 
     public Double getHotelWeekIncome() {
-        String sql = "SELECT * FROM get_hotel_week_income()";
-        String weekIncome = String.valueOf(database.getSingleValue(sql, null, "week_income"));
-        return new BigDecimal(weekIncome).doubleValue();
+        String sql = "SELECT * FROM get_hotel_week_income(?)";
+        List<Object> params = List.of(getId(hotel));
+        Object weekIncome = database.getSingleValue(sql, params, "week_income");
+        return weekIncome != null ? new BigDecimal(String.valueOf(weekIncome)).doubleValue() : 0.0;
     }
 }

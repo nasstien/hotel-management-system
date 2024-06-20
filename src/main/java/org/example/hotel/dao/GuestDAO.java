@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import java.util.List;
 
+import static org.example.hotel.Application.hotel;
 import static org.example.hotel.Application.database;
 
 public class GuestDAO extends BaseDAO<Guest> {
@@ -70,19 +71,24 @@ public class GuestDAO extends BaseDAO<Guest> {
     }
 
     public List<Object[]> getGuestsByServiceOrder(String serviceName) {
-        String sql = "SELECT * FROM get_guests_by_service_order(?)";
-        List<Object> params = List.of(Util.capitalize(serviceName.toLowerCase()));
+        String sql = "SELECT * FROM get_guests_by_service_order(?, ?)";
+        List<Object> params = List.of(
+                new HotelDAO().getId(hotel),
+                Util.capitalize(serviceName.toLowerCase())
+        );
         return database.getColumnRows(sql, params);
     }
 
     public List<Object[]> getGuestsPerService() {
-        String sql = "SELECT * FROM get_guests_per_service()" +
+        String sql = "SELECT * FROM get_guests_per_service(?)" +
                      "ORDER BY guest_count DESC";
-        return database.getColumnRows(sql, null);
+        List<Object> params = List.of(new HotelDAO().getId(hotel));
+        return database.getColumnRows(sql, params);
     }
 
     public List<Object[]> getGuestsWithComments() {
-        String sql = "SELECT * FROM get_guests_with_comments()";
-        return database.getColumnRows(sql, null);
+        String sql = "SELECT * FROM get_guests_with_comments(?)";
+        List<Object> params = List.of(new HotelDAO().getId(hotel));
+        return database.getColumnRows(sql, params);
     }
 }

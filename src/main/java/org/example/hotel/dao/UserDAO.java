@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
+import static org.example.hotel.Application.hotel;
 import static org.example.hotel.Application.database;
 
 public class UserDAO extends BaseDAO<User> {
@@ -91,14 +92,20 @@ public class UserDAO extends BaseDAO<User> {
     }
 
     public List<Object[]> getUsersByEmailDomain(String emailDomain) {
-        String sql = "SELECT * FROM get_users_by_email_domain(?)";
-        List<Object> params = List.of(STR."%\{emailDomain}");
+        String sql = "SELECT * FROM get_users_by_email_domain(?, ?)";
+        List<Object> params = List.of(
+                new HotelDAO().getId(hotel),
+                STR."%\{emailDomain}"
+        );
         return database.getColumnRows(sql, params);
     }
 
     public List<Object[]> getHighestPaidEmployeesByPosition(String position) {
-        String sql = "SELECT * FROM get_highest_paid_employees_by_position(?)";
-        List<Object> params = List.of(Util.capitalize(position.toLowerCase()));
+        String sql = "SELECT * FROM get_highest_paid_employees_by_position(?, ?)";
+        List<Object> params = List.of(
+                new HotelDAO().getId(hotel),
+                Util.capitalize(position.toLowerCase())
+        );
         return database.getColumnRows(sql, params);
     }
 }
