@@ -1,0 +1,2 @@
+## Hotel Management System
+This application has been developed as a course project to streamline hotel operations by automating various processes such as booking management, customer check-in/check-out, room availability, billing, reporting and analytics.
