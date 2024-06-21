@@ -4,9 +4,11 @@ import org.example.hotel.dao.UserDAO;
 import org.example.hotel.models.User;
 import org.example.hotel.utils.Util;
 import org.example.hotel.utils.Validator;
+import org.example.hotel.utils.HotkeyHandler;
 import org.example.hotel.utils.gui.Message;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 
@@ -15,18 +17,21 @@ import java.util.Date;
 import static org.example.hotel.Application.*;
 
 public class SettingsController {
-    @FXML TextField firstNameField;
-    @FXML TextField lastNameField;
-    @FXML TextField emailField;
-    @FXML TextField phoneNumField;
-    @FXML TextField passportNumField;
-    @FXML TextField positionField;
-    @FXML TextField salaryField;
-    @FXML PasswordField passwordField;
-    @FXML PasswordField passwordConfirmField;
+    @FXML private VBox root;
+    @FXML private TextField firstNameField;
+    @FXML private TextField lastNameField;
+    @FXML private TextField emailField;
+    @FXML private TextField phoneNumField;
+    @FXML private TextField passportNumField;
+    @FXML private TextField positionField;
+    @FXML private TextField salaryField;
+    @FXML private PasswordField passwordField;
+    @FXML private PasswordField passwordConfirmField;
 
     @FXML
     public void initialize() {
+        initializeHotkeys();
+
         firstNameField.setPromptText(user.getFirstName());
         lastNameField.setPromptText(user.getLastName());
         emailField.setPromptText(user.getEmail());
@@ -90,6 +95,13 @@ public class SettingsController {
     @FXML
     private void handleDeleteClick() {
         Message.displayConfirmDialog("Are you sure you want to delete an account?", this::deleteAccount);
+    }
+
+    private void initializeHotkeys() {
+        HotkeyHandler.handleEnterPressed(root, this::handleSaveClick);
+        HotkeyHandler.handleDeleteAccountPressed(root, this::handleDeleteClick);
+        HotkeyHandler.handleBackPressed(root);
+        HotkeyHandler.handleExitPressed(root);
     }
 
     private void deleteAccount() {

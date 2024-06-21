@@ -25,7 +25,7 @@ public class EditPageController implements EntityController {
     private Map<String, Runnable> handlers;
     private Parent form;
 
-    @FXML private VBox vBox;
+    @FXML private VBox root;
     @FXML private Label headingLabel;
     @FXML private ComboBox<Object> idField;
     @FXML private Button saveButton;
@@ -34,7 +34,9 @@ public class EditPageController implements EntityController {
     public void initialize(String entity) throws Exception {
         this.entity = entity;
         this.handlers = new HashMap<>();
+
         initializeHandlers();
+        initializeHotkeys();
 
         headingLabel.setText(STR."Edit \{this.entity}");
         idField.setPromptText(STR."\{this.entity} ID");
@@ -68,12 +70,18 @@ public class EditPageController implements EntityController {
                 this::saveServiceOrder);
     }
 
+    private void initializeHotkeys() {
+        HotkeyHandler.handleEnterPressed(root, this::handleSaveClick);
+        HotkeyHandler.handleBackPressed(root);
+        HotkeyHandler.handleExitPressed(root);
+    }
+
     private void loadForm() throws Exception {
         String fileName = entity.replace(' ', '-').toLowerCase();
         form = GUI.loadPage(STR."forms/\{fileName}.fxml");
 
-        int buttonIndex = vBox.getChildren().indexOf(saveButton);
-        vBox.getChildren().add(buttonIndex, form);
+        int buttonIndex = root.getChildren().indexOf(saveButton);
+        root.getChildren().add(buttonIndex, form);
     }
 
     private void saveUser() {

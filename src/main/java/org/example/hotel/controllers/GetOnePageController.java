@@ -9,10 +9,10 @@ import org.example.hotel.interfaces.EntityController;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
@@ -28,6 +28,7 @@ public class GetOnePageController implements EntityController {
     private String entity;
     private Map<String, Runnable> handlers;
 
+    @FXML private VBox root;
     @FXML private Label headingLabel;
     @FXML private ComboBox<Object> idField;
 
@@ -35,7 +36,9 @@ public class GetOnePageController implements EntityController {
     public void initialize(String entity) {
         this.entity = entity;
         this.handlers = new HashMap<>();
+
         initializeHandlers();
+        initializeHotkeys();
 
         headingLabel.setText(STR."Get \{this.entity}");
         idField.setPromptText(STR."\{this.entity} ID");
@@ -64,6 +67,12 @@ public class GetOnePageController implements EntityController {
                 this::getPayment,
                 this::getService,
                 this::getServiceOrder);
+    }
+
+    private void initializeHotkeys() {
+        HotkeyHandler.handleEnterPressed(root, this::handleGetClick);
+        HotkeyHandler.handleBackPressed(root);
+        HotkeyHandler.handleExitPressed(root);
     }
 
     private void getUser() {

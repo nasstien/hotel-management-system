@@ -27,18 +27,21 @@ public class AnalyticsController {
 
         Parent root = GUI.loadPage("analytics/analytics-form.fxml");
 
-        VBox vBox = (VBox) root.lookup("#vBox");
+        VBox vBox = (VBox) root.lookup("#root");
         Label headingLabel = (Label) root.lookup("#headingLabel");
         Button getButton = (Button) root.lookup("#getButton");
+
+        headingLabel.setText("Get Guests By Service Order");
 
         int index = vBox.getChildren().indexOf(getButton);
         vBox.getChildren().add(index, comboBox);
 
-        headingLabel.setText("Get Guests By Service Order");
-        getButton.setOnAction((e) -> {
+        Runnable action = () -> {
             getGuestsByServiceOrder((String) comboBox.getValue());
             comboBox.setValue(null);
-        });
+        };
+        initializeFormHotkeys(vBox, action);
+        getButton.setOnAction((e) -> action.run());
 
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);
@@ -49,9 +52,11 @@ public class AnalyticsController {
         TextField textField = GUI.createTextField("Email Domain (@example.com)");
         Parent root = GUI.loadPage("analytics/analytics-form.fxml");
 
-        VBox vBox = (VBox) root.lookup("#vBox");
+        VBox vBox = (VBox) root.lookup("#root");
         Label headingLabel = (Label) root.lookup("#headingLabel");
         Button getButton = (Button) root.lookup("#getButton");
+
+        headingLabel.setText("Get Users By Email Domain");
 
         int index = vBox.getChildren().indexOf(getButton);
         vBox.getChildren().add(index, textField);
@@ -59,11 +64,12 @@ public class AnalyticsController {
         Insets insets = new Insets(0, 475, 0, 475);
         VBox.setMargin(textField, insets);
 
-        headingLabel.setText("Get Users By Email Domain");
-        getButton.setOnAction((e) -> {
+        Runnable action = () -> {
             getUsersByEmailDomain(textField.getText());
             textField.clear();
-        });
+        };
+        initializeFormHotkeys(vBox, action);
+        getButton.setOnAction((e) -> action.run());
 
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);
@@ -76,20 +82,23 @@ public class AnalyticsController {
         DatePicker startDateField = GUI.createDatePicker("Start Date");
         DatePicker endDateField = GUI.createDatePicker("End Date");
 
-        VBox vBox = (VBox) root.lookup("#vBox");
+        VBox vBox = (VBox) root.lookup("#root");
         Label headingLabel = (Label) root.lookup("#headingLabel");
         Button getButton = (Button) root.lookup("#getButton");
+
+        headingLabel.setText("Get Payments By Date Interval");
 
         int index = vBox.getChildren().indexOf(getButton);
         vBox.getChildren().add(index, startDateField);
         vBox.getChildren().add(index + 1, endDateField);
 
-        headingLabel.setText("Get Payments By Date Interval");
-        getButton.setOnAction((e) -> {
+        Runnable action = () -> {
             getPaymentsByDateInterval(Util.parseDate(startDateField.getValue()), Util.parseDate(endDateField.getValue()));
             startDateField.setValue(null);
             endDateField.setValue(null);
-        });
+        };
+        initializeFormHotkeys(vBox, action);
+        getButton.setOnAction((e) -> action.run());
 
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);
@@ -104,13 +113,16 @@ public class AnalyticsController {
         Stage stage = GUI.createStage(scene, GUI.WINDOW_TITLE, GUI.WINDOW_ICON, null);
         GUI.loadStyleSheet(scene);
 
+        Runnable action = stage::close;
+        HotkeyHandler.handleEnterPressed(vBox, action);
+
         double income = new HotelDAO().getHotelWeekIncome();
 
         Label headingLabel = GUI.createLabel("Hotel Week Income", "large-text");
         Label incomeLabel = GUI.createLabel(STR."\{income} UAH", "income-label");
 
         Button closeButton = new Button("Close");
-        closeButton.setOnAction((e) -> stage.close());
+        closeButton.setOnAction((e) -> action.run());
 
         vBox.getChildren().addAll(headingLabel, incomeLabel, closeButton);
         stage.show();
@@ -139,20 +151,21 @@ public class AnalyticsController {
 
         Parent root = GUI.loadPage("analytics/analytics-form.fxml");
 
-        VBox vBox = (VBox) root.lookup("#vBox");
+        VBox vBox = (VBox) root.lookup("#root");
         Label headingLabel = (Label) root.lookup("#headingLabel");
         Button getButton = (Button) root.lookup("#getButton");
 
-        if (vBox != null && headingLabel != null && getButton != null) {
-            int index = vBox.getChildren().indexOf(getButton);
+        headingLabel.setText("Highest Paid Employees By Position");
 
-            vBox.getChildren().add(index, comboBox);
-            headingLabel.setText("Highest Paid Employees By Position");
-            getButton.setOnAction((e) -> {
-                getHighestPaidEmployeesByPosition((String) comboBox.getValue());
-                comboBox.setValue(null);
-            });
-        }
+        int index = vBox.getChildren().indexOf(getButton);
+        vBox.getChildren().add(index, comboBox);
+
+        Runnable action = () -> {
+            getHighestPaidEmployeesByPosition((String) comboBox.getValue());
+            comboBox.setValue(null);
+        };
+        initializeFormHotkeys(vBox, action);
+        getButton.setOnAction((e) -> action.run());
 
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);
@@ -181,20 +194,21 @@ public class AnalyticsController {
 
         Parent root = GUI.loadPage("analytics/analytics-form.fxml");
 
-        VBox vBox = (VBox) root.lookup("#vBox");
+        VBox vBox = (VBox) root.lookup("#root");
         Label headingLabel = (Label) root.lookup("#headingLabel");
         Button getButton = (Button) root.lookup("#getButton");
 
-        getButton.setOnAction((e) -> getUnorderedServicesByDateInterval(comboBox.getValue().toLowerCase()));
+        headingLabel.setText("Get Unordered Services By Date Interval");
 
         int index = vBox.getChildren().indexOf(getButton);
         vBox.getChildren().add(index, comboBox);
 
-        headingLabel.setText("Get Unordered Services By Date Interval");
-        getButton.setOnAction((e) -> {
-            getUnorderedServicesByDateInterval(comboBox.getValue());
+        Runnable action = () -> {
+            getUnorderedServicesByDateInterval(comboBox.getValue().toLowerCase());
             comboBox.setValue(null);
-        });
+        };
+        initializeFormHotkeys(vBox, action);
+        getButton.setOnAction((e) -> action.run());
 
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);
@@ -344,8 +358,8 @@ public class AnalyticsController {
 
     private <T> Parent loadTable(String heading, TableColumn<Object[], ?>[] columns, List<T> rows) throws Exception {
         Parent root = GUI.loadPage("analytics/analytics-table.fxml");
+        VBox vBox = (VBox) root.lookup("#root");
         Label headingLabel = (Label) root.lookup("#headingLabel");
-        VBox vBox = (VBox) root.lookup("#vBox");
 
         headingLabel.setText(heading);
 
@@ -356,8 +370,20 @@ public class AnalyticsController {
             tableView.getItems().addAll(rows);
             tableView.getColumns().addAll((TableColumn[]) columns);
             tableView.setPrefSize(Table.TABLE_WIDTH, Table.TABLE_HEIGHT);
+
+            initializeTableHotkeys(vBox);
         }
 
         return root;
+    }
+
+    private void initializeTableHotkeys(VBox root) {
+        HotkeyHandler.handleBackPressed(root);
+        HotkeyHandler.handleExitPressed(root);
+    }
+
+    private void initializeFormHotkeys(VBox root, Runnable action) {
+        HotkeyHandler.handleEnterPressed(root, action);
+        initializeTableHotkeys(root);
     }
 }

@@ -1,27 +1,24 @@
 package org.example.hotel.controllers;
 
+import org.example.hotel.utils.*;
+import org.example.hotel.utils.gui.Message;
 import org.example.hotel.dao.HotelDAO;
 import org.example.hotel.dao.UserDAO;
 import org.example.hotel.models.User;
 import org.example.hotel.enums.Role;
-import org.example.hotel.utils.Util;
-import org.example.hotel.utils.Validator;
-import org.example.hotel.utils.gui.Message;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 
 import java.util.Date;
 import java.util.Objects;
 
-import static org.example.hotel.Application.user;
-import static org.example.hotel.Application.hotel;
-import static org.example.hotel.Application.primaryStage;
-import static org.example.hotel.Application.mainMenu;
-import static org.example.hotel.Application.login;
+import static org.example.hotel.Application.*;
 
 public class SignUpController {
+    @FXML private VBox root;
     @FXML private ComboBox<Object> hotelIdField;
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
@@ -34,11 +31,13 @@ public class SignUpController {
 
     @FXML
     public void initialize() {
+        initializeHotkeys();
+
         hotelIdField.getItems().addAll(new HotelDAO().getIds());
     }
 
     @FXML
-    private void handleSignUpClick() throws Exception {
+    private void handleSignUpClick() {
         String errMessage = "";
 
         if (Validator.isEmptyFields(new TextField[] {
@@ -88,11 +87,20 @@ public class SignUpController {
         new UserDAO().insert(newUser);
         user = newUser;
 
-        primaryStage.setScene(mainMenu());
+        try {
+            primaryStage.setScene(mainMenu());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     @FXML
     private void handleLogInClick() throws Exception {
         primaryStage.setScene(login());
+    }
+
+    private void initializeHotkeys() {
+        HotkeyHandler.handleEnterPressed(root, this::handleSignUpClick);
+        HotkeyHandler.handleExitPressed(root);
     }
 }

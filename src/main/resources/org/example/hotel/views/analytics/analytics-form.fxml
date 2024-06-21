@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 
-<VBox fx:id="vBox" alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" spacing="10" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.AnalyticsController">
+<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" spacing="10" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.AnalyticsController">
     <Label fx:id="headingLabel" styleClass="heading" />
     <Button fx:id="getButton" mnemonicParsing="false" text="Get" />
     <Button mnemonicParsing="false" text="Back" onAction="#handleBackClick" />

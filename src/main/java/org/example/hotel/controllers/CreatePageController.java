@@ -24,7 +24,7 @@ public class CreatePageController implements EntityController {
     private Map<String, Runnable> handlers;
     private Parent form;
 
-    @FXML private VBox vBox;
+    @FXML private VBox root;
     @FXML private Label headingLabel;
     @FXML private Button createButton;
 
@@ -32,12 +32,14 @@ public class CreatePageController implements EntityController {
     public void initialize(String entity) throws Exception {
         this.entity = entity;
         this.handlers = new HashMap<>();
+
         initializeHandlers();
+        initializeHotkeys();
 
         headingLabel.setText(STR."Create \{this.entity}");
-
         loadForm();
         GUI.initializeComboBoxes(form);
+
     }
 
     @FXML
@@ -58,12 +60,18 @@ public class CreatePageController implements EntityController {
                 this::createServiceOrder);
     }
 
+    private void initializeHotkeys() {
+        HotkeyHandler.handleEnterPressed(root, this::handleCreateClick);
+        HotkeyHandler.handleBackPressed(root);
+        HotkeyHandler.handleExitPressed(root);
+    }
+
     private void loadForm() throws Exception {
         String fileName = entity.replace(' ', '-').toLowerCase();
         form = GUI.loadPage(STR."forms/\{fileName}.fxml");
 
-        int buttonIndex = vBox.getChildren().indexOf(createButton);
-        vBox.getChildren().add(buttonIndex, form);
+        int buttonIndex = root.getChildren().indexOf(createButton);
+        root.getChildren().add(buttonIndex, form);
     }
 
     private void createUser() {

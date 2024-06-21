@@ -36,35 +36,35 @@ public class ControlPanelController implements EntityController {
     }
 
     @FXML
-    public void handleGetAllClick() throws Exception {
+    private void handleGetAllClick() throws Exception {
         Parent root = GUI.loadPage("control-panel/get-all-page.fxml", List.of(entity));
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);
     }
 
     @FXML
-    public void handleGetOneClick() throws Exception {
+    private void handleGetOneClick() throws Exception {
         Parent root = GUI.loadPage("control-panel/get-one-page.fxml", List.of(entity));
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);
     }
 
     @FXML
-    public void handleCreateClick() throws Exception {
+    private void handleCreateClick() throws Exception {
         Parent root = GUI.loadPage("control-panel/create-page.fxml", List.of(entity));
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);
     }
 
     @FXML
-    public void handleEditClick() throws Exception {
+    private void handleEditClick() throws Exception {
         Parent root = GUI.loadPage("control-panel/edit-page.fxml", List.of(entity));
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);
     }
 
     @FXML
-    public void handleDeleteClick() throws Exception {
+    private void handleDeleteClick() throws Exception {
         Parent root = GUI.loadPage("control-panel/delete-page.fxml", List.of(entity));
         history.push(GUI.createScene(root));
         primaryStage.getScene().setRoot(root);

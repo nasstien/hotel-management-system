@@ -1,14 +1,15 @@
 package org.example.hotel.controllers;
 
 import org.example.hotel.dao.*;
+import org.example.hotel.utils.*;
 import org.example.hotel.utils.gui.*;
 import org.example.hotel.interfaces.EntityController;
 import org.example.hotel.models.Booking;
 import org.example.hotel.models.Guest;
 import org.example.hotel.models.Room;
-import org.example.hotel.utils.Util;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
 
@@ -22,6 +23,7 @@ public class DeletePageController implements EntityController {
     private String entity;
     private Map<String, Runnable> handlers;
 
+    @FXML private VBox root;
     @FXML private Label headingLabel;
     @FXML private ComboBox<Object> idField;
 
@@ -29,7 +31,9 @@ public class DeletePageController implements EntityController {
     public void initialize(String entity) {
         this.entity = entity;
         this.handlers = new HashMap<>();
+
         initializeHandlers();
+        initializeHotkeys();
 
         headingLabel.setText(STR."Delete \{this.entity}");
         idField.setPromptText(STR."\{this.entity} ID");
@@ -58,6 +62,12 @@ public class DeletePageController implements EntityController {
                 this::deletePayment,
                 this::deleteService,
                 this::deleteServiceOrder);
+    }
+
+    private void initializeHotkeys() {
+        HotkeyHandler.handleEnterPressed(root, this::handleDeleteClick);
+        HotkeyHandler.handleBackPressed(root);
+        HotkeyHandler.handleExitPressed(root);
     }
 
     private void deleteUser() {

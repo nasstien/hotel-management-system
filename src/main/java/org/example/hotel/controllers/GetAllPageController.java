@@ -3,9 +3,11 @@ package org.example.hotel.controllers;
 import org.example.hotel.dao.*;
 import org.example.hotel.models.*;
 import org.example.hotel.utils.gui.*;
+import org.example.hotel.utils.HotkeyHandler;
 import org.example.hotel.interfaces.EntityController;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,7 +17,8 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-import static org.example.hotel.Application.*;
+import static org.example.hotel.Application.history;
+import static org.example.hotel.utils.gui.GUI.initializeHandler;
 
 public class GetAllPageController<T> implements EntityController {
     private String entity;
@@ -23,6 +26,7 @@ public class GetAllPageController<T> implements EntityController {
     private List<T> rows;
     private TableColumn<?, ?>[] columns;
 
+    @FXML private VBox root;
     @FXML private Label headingLabel;
     @FXML private TableView<T> tableView;
 
@@ -33,8 +37,9 @@ public class GetAllPageController<T> implements EntityController {
         this.rows = new ArrayList<>();
         this.columns = new TableColumn[] {};
 
+        initializeHotkeys();
         initializeHandlers();
-        GUI.initializeHandler(entity, handlers);
+        initializeHandler(entity, handlers);
         initializeTable();
 
         headingLabel.setText(STR."Get All \{this.entity}s");
@@ -51,6 +56,11 @@ public class GetAllPageController<T> implements EntityController {
                 this::getAllPayments,
                 this::getAllServices,
                 this::getAllServiceOrders);
+    }
+
+    private void initializeHotkeys() {
+        HotkeyHandler.handleBackPressed(root);
+        HotkeyHandler.handleExitPressed(root);
     }
 
     private void initializeTable() {

@@ -32,4 +32,8 @@ public class History {
             scenes.clear();
         }
     }
+
+    public boolean isEmpty() {
+        return scenes.isEmpty();
+    }
 }

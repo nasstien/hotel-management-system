@@ -8,7 +8,7 @@
 <?import javafx.geometry.Insets?>
 
 <?import javafx.scene.layout.HBox?>
-<VBox alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" spacing="10.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.SettingsController">
+<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" spacing="10.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hotel.controllers.SettingsController">
     <Label styleClass="heading" text="Settings" />
     <VBox alignment="CENTER" spacing="10.0">
         <VBox.margin>

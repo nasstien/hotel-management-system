@@ -6,8 +6,8 @@ import javafx.scene.control.Label;
 import static org.example.hotel.Application.user;
 
 public class HomePageController {
-    @FXML public Label welcomeLabel;
-    @FXML public Label positionLabel;
+    @FXML private Label welcomeLabel;
+    @FXML private Label positionLabel;
 
     @FXML
     public void initialize() {
