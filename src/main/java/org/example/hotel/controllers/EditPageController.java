@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static org.example.hotel.Application.history;
 
@@ -40,7 +41,7 @@ public class EditPageController implements EntityController {
 
         headingLabel.setText(STR."Edit \{this.entity}");
         idField.setPromptText(STR."\{this.entity} ID");
-        idField.getItems().addAll(Util.getIds(this.entity));
+        idField.getItems().addAll(Objects.requireNonNull(DatabaseUtil.getIds(this.entity)));
 
         loadForm();
         GUI.initializeComboBoxes(form);
@@ -122,15 +123,15 @@ public class EditPageController implements EntityController {
         boolean modified = false;
         User user = new UserDAO().getOne(id);
 
-        modified |= Util.updateValue(firstNameField, user::setFirstName);
-        modified |= Util.updateValue(lastNameField, user::setLastName);
-        modified |= Util.updateValue(emailField, user::setEmail);
-        modified |= Util.updateValue(phoneNumField, user::setPhoneNum);
-        modified |= Util.updateValue(passportNumField, user::setPassportNum);
-        modified |= Util.updateValue(roleField, role -> user.setRole(Role.valueOf(role)));
-        modified |= Util.updateValue(positionField, user::setPosition);
-        modified |= Util.updateValue(salaryField, salary -> user.setSalary(Double.parseDouble(salary)));
-        modified |= Util.updateValue(passwordField, user::setPassword);
+        modified |= DatabaseUtil.updateValue(firstNameField.getText(), user::setFirstName);
+        modified |= DatabaseUtil.updateValue(lastNameField.getText(), user::setLastName);
+        modified |= DatabaseUtil.updateValue(emailField.getText(), user::setEmail);
+        modified |= DatabaseUtil.updateValue(phoneNumField.getText(), user::setPhoneNum);
+        modified |= DatabaseUtil.updateValue(passportNumField.getText(), user::setPassportNum);
+        modified |= DatabaseUtil.updateValue(roleField.getValue(), role -> user.setRole(Role.valueOf(role)));
+        modified |= DatabaseUtil.updateValue(positionField.getText(), user::setPosition);
+        modified |= DatabaseUtil.updateValue(salaryField.getText(), salary -> user.setSalary(Double.parseDouble(salary)));
+        modified |= DatabaseUtil.updateValue(passwordField.getText(), user::setPassword);
 
         if (modified) {
             user.setUpdatedAt(new Date());
@@ -159,7 +160,7 @@ public class EditPageController implements EntityController {
         } else if (!phoneNumField.getText().isEmpty() && Validator.isValidPhoneNum(phoneNumField.getText())) {
             errMessage = "Phone number must start with \"+\" and contain only integers.";
         } else if (checkInDateField.getValue() != null && checkOutDateField.getValue() != null &&
-                Validator.isValidDateInterval(Util.parseDate(checkInDateField.getValue()), Util.parseDate(checkOutDateField.getValue()))) {
+                Validator.isValidDateInterval(DateUtil.parseDate(checkInDateField.getValue()), DateUtil.parseDate(checkOutDateField.getValue()))) {
             errMessage = "Check-out date cannot be earlier than check-in date.";
         }
 
@@ -171,19 +172,19 @@ public class EditPageController implements EntityController {
         boolean modified = false;
         Guest guest = new GuestDAO().getOne(id);
 
-        modified |= Util.updateValue(firstNameField, guest::setFirstName);
-        modified |= Util.updateValue(lastNameField, guest::setLastName);
-        modified |= Util.updateValue(emailField, guest::setEmail);
-        modified |= Util.updateValue(phoneNumField, guest::setPhoneNum);
-        modified |= Util.updateValue(passportNumField, guest::setPassportNum);
+        modified |= DatabaseUtil.updateValue(firstNameField.getText(), guest::setFirstName);
+        modified |= DatabaseUtil.updateValue(lastNameField.getText(), guest::setLastName);
+        modified |= DatabaseUtil.updateValue(emailField.getText(), guest::setEmail);
+        modified |= DatabaseUtil.updateValue(phoneNumField.getText(), guest::setPhoneNum);
+        modified |= DatabaseUtil.updateValue(passportNumField.getText(), guest::setPassportNum);
 
-        modified |= Util.updateValue(checkInDateField, date -> {
-            Date checkInDate = Util.parseDate(LocalDate.parse(date));
+        modified |= DatabaseUtil.updateValue(checkInDateField, date -> {
+            Date checkInDate = DateUtil.parseDate(LocalDate.parse(date));
             guest.setCheckInDate(checkInDate);
         });
 
-        modified |= Util.updateValue(checkOutDateField, date -> {
-            Date checkOutDate = Util.parseDate(LocalDate.parse(date));
+        modified |= DatabaseUtil.updateValue(checkOutDateField, date -> {
+            Date checkOutDate = DateUtil.parseDate(LocalDate.parse(date));
             guest.setCheckOutDate(checkOutDate);
         });
 
@@ -204,7 +205,7 @@ public class EditPageController implements EntityController {
         boolean modified = false;
         Room room = new RoomDAO().getOne(id);
 
-        modified |= Util.updateValue(typeIdField, typeId -> {
+        modified |= DatabaseUtil.updateValue(typeIdField.getValue(), typeId -> {
             RoomType type = new RoomTypeDAO().getOne(Integer.parseInt(typeId));
             room.setType(type);
         });
@@ -246,10 +247,10 @@ public class EditPageController implements EntityController {
         boolean modified = false;
         RoomType roomType = new RoomTypeDAO().getOne(id);
 
-        modified |= Util.updateValue(nameField, roomType::setName);
-        modified |= Util.updateValue(descriptionField, roomType::setDescription);
-        modified |= Util.updateValue(priceField, price -> roomType.setPricePerNight(Double.parseDouble(price)));
-        modified |= Util.updateValue(capacityField, capacity -> roomType.setCapacity(Integer.parseInt(capacity)));
+        modified |= DatabaseUtil.updateValue(nameField.getText(), roomType::setName);
+        modified |= DatabaseUtil.updateValue(descriptionField.getText(), roomType::setDescription);
+        modified |= DatabaseUtil.updateValue(priceField.getText(), price -> roomType.setPricePerNight(Double.parseDouble(price)));
+        modified |= DatabaseUtil.updateValue(capacityField.getText(), capacity -> roomType.setCapacity(Integer.parseInt(capacity)));
 
         if (modified) {
             roomType.setUpdatedAt(new Date());
@@ -274,17 +275,17 @@ public class EditPageController implements EntityController {
         boolean modified = false;
         Booking booking = new BookingDAO().getOne(id);
 
-        modified |= Util.updateValue(roomIdField, roomId -> {
+        modified |= DatabaseUtil.updateValue(roomIdField.getValue(), roomId -> {
             Room room = new RoomDAO().getOne(Integer.parseInt(roomId));
             booking.setRoom(room);
         });
 
-        modified |= Util.updateValue(guestIdField, guestId -> {
+        modified |= DatabaseUtil.updateValue(guestIdField.getValue(), guestId -> {
             Guest guest = new GuestDAO().getOne(Integer.parseInt(guestId));
             booking.setGuest(guest);
         });
 
-        modified |= Util.updateValue(paymentIdField, paymentId -> {
+        modified |= DatabaseUtil.updateValue(paymentIdField.getValue(), paymentId -> {
             Payment payment = new PaymentDAO().getOne(Integer.parseInt(paymentId));
             booking.setPayment(payment);
         });
@@ -314,22 +315,22 @@ public class EditPageController implements EntityController {
             payment.setPaid(paidCheckBox.isSelected());
         });
 
-        modified |= Util.updateValue(guestIdField, guestId -> {
+        modified |= DatabaseUtil.updateValue(guestIdField.getValue(), guestId -> {
             Guest guest = new GuestDAO().getOne(Integer.parseInt(guestId));
             payment.setGuest(guest);
         });
 
-        modified |= Util.updateValue(roomIdField, roomId -> {
+        modified |= DatabaseUtil.updateValue(roomIdField.getValue(), roomId -> {
             Room room = new RoomDAO().getOne(Integer.parseInt(roomId));
             payment.setRoomCharges(room.getType().getPricePerNight());
         });
 
-        modified |= Util.updateValue(serviceIdField, serviceId -> {
+        modified |= DatabaseUtil.updateValue(serviceIdField.getValue(), serviceId -> {
             Service service = new ServiceDAO().getOne(Integer.parseInt(serviceId));
             payment.setServiceCharges(service.getPrice());
         });
 
-        modified |= Util.updateValue(methodField, method -> {
+        modified |= DatabaseUtil.updateValue(methodField.getValue(), method -> {
             PaymentMethod paymentMethod = PaymentMethod.valueOf(method.toUpperCase());
             payment.setPaymentMethod(paymentMethod);
         });
@@ -367,12 +368,12 @@ public class EditPageController implements EntityController {
             service.setAvailable(isAvailableCheckBox.isSelected());
         });
 
-        modified |= Util.updateValue(nameField, service::setName);
-        modified |= Util.updateValue(descriptionField, service::setDescription);
-        modified |= Util.updateValue(categoryField, service::setCategory);
-        modified |= Util.updateValue(startTimeField, service::setStartTime);
-        modified |= Util.updateValue(endTimeField, service::setEndTime);
-        modified |= Util.updateValue(priceField, price -> service.setPrice(Double.parseDouble(price)));
+        modified |= DatabaseUtil.updateValue(nameField.getText(), service::setName);
+        modified |= DatabaseUtil.updateValue(descriptionField.getText(), service::setDescription);
+        modified |= DatabaseUtil.updateValue(categoryField.getText(), service::setCategory);
+        modified |= DatabaseUtil.updateValue(startTimeField.getText(), service::setStartTime);
+        modified |= DatabaseUtil.updateValue(endTimeField.getText(), service::setEndTime);
+        modified |= DatabaseUtil.updateValue(priceField.getText(), price -> service.setPrice(Double.parseDouble(price)));
 
         if (modified) {
             service.setUpdatedAt(new Date());
@@ -399,24 +400,24 @@ public class EditPageController implements EntityController {
         boolean modified = false;
         ServiceOrder order = new ServiceOrderDAO().getOne(id);
 
-        modified |= Util.updateValue(serviceIdField, serviceId -> {
+        modified |= DatabaseUtil.updateValue(serviceIdField.getValue(), serviceId -> {
             Service service = new ServiceDAO().getOne(Integer.parseInt(serviceId));
             order.setService(service);
         });
 
-        modified |= Util.updateValue(bookingIdField, bookingId -> {
+        modified |= DatabaseUtil.updateValue(bookingIdField.getValue(), bookingId -> {
             Booking booking = new BookingDAO().getOne(Integer.parseInt(bookingId));
             order.setBooking(booking);
         });
 
-        modified |= Util.updateValue(paymentIdField, paymentId -> {
+        modified |= DatabaseUtil.updateValue(paymentIdField.getValue(), paymentId -> {
             Payment payment = new PaymentDAO().getOne(Integer.parseInt(paymentId));
             order.setPayment(payment);
         });
 
-        modified |= Util.updateValue(serviceTimeField, order::setServiceTime);
-        modified |= Util.updateValue(serviceDateField, date -> {
-            Date serviceDate = Util.parseDate(LocalDate.parse(date));
+        modified |= DatabaseUtil.updateValue(serviceTimeField.getText(), order::setServiceTime);
+        modified |= DatabaseUtil.updateValue(serviceDateField.getValue(), date -> {
+            Date serviceDate = DateUtil.parseDate(LocalDate.parse(date));
             order.setServiceDate(serviceDate);
         });
 

@@ -127,9 +127,9 @@ public class CreatePageController implements EntityController {
                 phoneNumField.getText(),
                 passportNumField.getText(),
                 Role.valueOf(roleField.getValue().toUpperCase()),
-                Util.capitalize(positionField.getText().toLowerCase()),
+                StringUtil.capitalize(positionField.getText().toLowerCase()),
                 Double.parseDouble(salaryField.getText()),
-                Util.hashPassword(passwordField.getText()),
+                DatabaseUtil.hashPassword(passwordField.getText()),
                 new Date(), new Date());
         new UserDAO().insert(user);
 
@@ -156,7 +156,7 @@ public class CreatePageController implements EntityController {
             errMessage = "Email is invalid.";
         } else if (!Validator.isValidPhoneNum(phoneNumField.getText())) {
             errMessage = "Phone number must start with \"+\" and contain only integers.";
-        } else if (!Validator.isValidDateInterval(Util.parseDate(checkInDateField.getValue()), Util.parseDate(checkOutDateField.getValue()))) {
+        } else if (!Validator.isValidDateInterval(DateUtil.parseDate(checkInDateField.getValue()), DateUtil.parseDate(checkOutDateField.getValue()))) {
             errMessage = "Check-out date cannot be earlier than check-in date.";
         }
 
@@ -172,8 +172,8 @@ public class CreatePageController implements EntityController {
                 emailField.getText(),
                 phoneNumField.getText(),
                 passportNumField.getText(),
-                Util.parseDate(checkInDateField.getValue()),
-                Util.parseDate(checkOutDateField.getValue()),
+                DateUtil.parseDate(checkInDateField.getValue()),
+                DateUtil.parseDate(checkOutDateField.getValue()),
                 new Date(), new Date());
         new GuestDAO().insert(guest);
 
@@ -225,7 +225,7 @@ public class CreatePageController implements EntityController {
         int capacity = Integer.parseInt(capacityField.getText());
         RoomType roomType = new RoomType(
                 hotel,
-                Util.capitalize(nameField.getText()),
+                StringUtil.capitalize(nameField.getText()),
                 descriptionField.getText(),
                 price, capacity,
                 new Date(), new Date()
@@ -285,7 +285,7 @@ public class CreatePageController implements EntityController {
         Room room = new RoomDAO().getOne(roomIdField.getValue());
         Service service = serviceIdField.getValue() != null ? new ServiceDAO().getOne(serviceIdField.getValue()) : null;
 
-        Double roomCharges = room.getType().getPricePerNight() * Util.getNumOfDays(guest.getCheckInDate(), guest.getCheckOutDate());
+        Double roomCharges = room.getType().getPricePerNight() * DateUtil.getNumOfDays(guest.getCheckInDate(), guest.getCheckOutDate());
         Double serviceCharges = service != null ? service.getPrice() : 0;
         PaymentMethod paymentMethod = PaymentMethod.valueOf(methodField.getValue().toUpperCase());
 
@@ -375,7 +375,7 @@ public class CreatePageController implements EntityController {
         ServiceOrder order = new ServiceOrder(
                 hotel, service, booking, payment,
                 serviceTimeField.getText(),
-                Util.parseDate(serviceDateField.getValue()),
+                DateUtil.parseDate(serviceDateField.getValue()),
                 new Date(), new Date()
         );
         new ServiceOrderDAO().insert(order);

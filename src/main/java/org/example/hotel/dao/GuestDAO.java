@@ -1,7 +1,7 @@
 package org.example.hotel.dao;
 
 import org.example.hotel.models.Guest;
-import org.example.hotel.utils.Util;
+import org.example.hotel.utils.StringUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,7 +74,7 @@ public class GuestDAO extends BaseDAO<Guest> {
         String sql = "SELECT * FROM get_guests_by_service_order(?, ?)";
         List<Object> params = List.of(
                 new HotelDAO().getId(hotel),
-                Util.capitalize(serviceName.toLowerCase())
+                StringUtil.capitalize(serviceName.toLowerCase())
         );
         return database.getColumnRows(sql, params);
     }

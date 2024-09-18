@@ -2,7 +2,8 @@ package org.example.hotel.dao;
 
 import org.example.hotel.enums.Role;
 import org.example.hotel.models.User;
-import org.example.hotel.utils.Util;
+import org.example.hotel.utils.DatabaseUtil;
+import org.example.hotel.utils.StringUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,7 +82,7 @@ public class UserDAO extends BaseDAO<User> {
     public User getUser(int hotelId, String email, String password) {
         String sql = STR."SELECT * FROM \{getTableName()} " +
                          "WHERE hotel_id = ? AND email = ? AND password = ?";
-        List<Object> params = List.of(hotelId, email, Objects.requireNonNull(Util.hashPassword(password)));
+        List<Object> params = List.of(hotelId, email, Objects.requireNonNull(DatabaseUtil.hashPassword(password)));
         return database.getObject(sql, params, this::getObject);
     }
 
@@ -104,7 +105,7 @@ public class UserDAO extends BaseDAO<User> {
         String sql = "SELECT * FROM get_highest_paid_employees_by_position(?, ?)";
         List<Object> params = List.of(
                 new HotelDAO().getId(hotel),
-                Util.capitalize(position.toLowerCase())
+                StringUtil.capitalize(position.toLowerCase())
         );
         return database.getColumnRows(sql, params);
     }

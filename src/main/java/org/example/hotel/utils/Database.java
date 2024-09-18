@@ -63,7 +63,7 @@ public class Database {
         try {
             statement = database.getConnection().prepareStatement(sql);
             if (params != null) {
-                Util.setParams(statement, params);
+                DatabaseUtil.setParams(statement, params);
             }
 
             resultSet = statement.executeQuery();
@@ -88,7 +88,7 @@ public class Database {
         try {
             statement = database.getConnection().prepareStatement(sql);
             if (params != null) {
-                Util.setParams(statement, params);
+                DatabaseUtil.setParams(statement, params);
             }
 
             resultSet = statement.executeQuery();
@@ -111,7 +111,7 @@ public class Database {
         try {
             statement = database.getConnection().prepareStatement(sql);
             if (params != null) {
-                Util.setParams(statement, params);
+                DatabaseUtil.setParams(statement, params);
             }
 
             resultSet = statement.executeQuery();
@@ -136,7 +136,7 @@ public class Database {
             statement = database.getConnection().prepareStatement(sql);
 
             if (params != null) {
-                Util.setParams(statement, params);
+                DatabaseUtil.setParams(statement, params);
             }
 
             resultSet = statement.executeQuery();
@@ -163,7 +163,7 @@ public class Database {
             statement = database.getConnection().prepareStatement(sql);
 
             if (params != null) {
-                Util.setParams(statement, params);
+                DatabaseUtil.setParams(statement, params);
             }
 
             resultSet = statement.executeQuery();
@@ -196,7 +196,7 @@ public class Database {
         try {
             statement = database.getConnection().prepareStatement(sql);
             if (params != null) {
-                Util.setParams(statement, params);
+                DatabaseUtil.setParams(statement, params);
             }
 
             statement.executeUpdate();

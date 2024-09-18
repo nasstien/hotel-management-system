@@ -93,7 +93,7 @@ public class AnalyticsController {
         vBox.getChildren().add(index + 1, endDateField);
 
         Runnable action = () -> {
-            getPaymentsByDateInterval(Util.parseDate(startDateField.getValue()), Util.parseDate(endDateField.getValue()));
+            getPaymentsByDateInterval(DateUtil.parseDate(startDateField.getValue()), DateUtil.parseDate(endDateField.getValue()));
             startDateField.setValue(null);
             endDateField.setValue(null);
         };
@@ -241,7 +241,7 @@ public class AnalyticsController {
             return;
         }
 
-        String heading = STR."Guests who ordered the service \"\{Util.capitalize(serviceName.toLowerCase())}\"";
+        String heading = STR."Guests who ordered the service \"\{StringUtil.capitalize(serviceName.toLowerCase())}\"";
         TableColumn<Object[], ?>[] columns = Column.getGuestsByServiceOrderColumns();
         List<Object[]> rows = new GuestDAO().getGuestsByServiceOrder(serviceName);
 
@@ -289,7 +289,7 @@ public class AnalyticsController {
             return;
         }
 
-        String heading = STR."Payments made between \{Util.parseDate(startDate)} and \{Util.parseDate(endDate)}";
+        String heading = STR."Payments made between \{DateUtil.parseDate(startDate)} and \{DateUtil.parseDate(endDate)}";
         TableColumn<Object[], ?>[] columns = Column.getPaymentsByDateIntervalColumns();
         List<Object[]> rows = new PaymentDAO().getPaymentsByDateInterval(startDate, endDate);
 
@@ -313,7 +313,7 @@ public class AnalyticsController {
             return;
         }
 
-        String heading = STR."Employees who earn more than all employees of the position \"\{Util.capitalize(position.toLowerCase())}\"";
+        String heading = STR."Employees who earn more than all employees of the position \"\{StringUtil.capitalize(position.toLowerCase())}\"";
         TableColumn<Object[], ?>[] columns = Column.getHighestPaidEmployeesByPositionColumns();
         List<Object[]> rows = new UserDAO().getHighestPaidEmployeesByPosition(position);
 
@@ -338,7 +338,7 @@ public class AnalyticsController {
         }
 
         interval = interval.toLowerCase();
-        String heading = STR."Services that have not been ordered in a \{Util.capitalize(interval)}";
+        String heading = STR."Services that have not been ordered in a \{StringUtil.capitalize(interval)}";
         TableColumn<Object[], ?>[] columns = Column.getUnorderedServicesByDateIntervalColumns();
         List<Object[]> rows = new ServiceDAO().getUnorderedServicesByDateInterval(interval);
 

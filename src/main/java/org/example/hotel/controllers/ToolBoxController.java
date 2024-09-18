@@ -1,7 +1,7 @@
 package org.example.hotel.controllers;
 
 import org.example.hotel.models.*;
-import org.example.hotel.utils.Util;
+import org.example.hotel.utils.StringUtil;
 import org.example.hotel.utils.gui.GUI;
 
 import javafx.fxml.FXML;
@@ -41,7 +41,7 @@ public class ToolBoxController {
 
     @FXML
     private void handleRoomTypesClick() throws Exception {
-        GUI.loadMenu("control-panel/control-panel.fxml", vBox, List.of(Util.addSpaces(RoomType.class.getSimpleName())));
+        GUI.loadMenu("control-panel/control-panel.fxml", vBox, List.of(StringUtil.addSpaces(RoomType.class.getSimpleName())));
     }
 
     @FXML
@@ -61,7 +61,7 @@ public class ToolBoxController {
 
     @FXML
     private void handleServiceOrdersClick() throws Exception {
-        GUI.loadMenu("control-panel/control-panel.fxml", vBox, List.of(Util.addSpaces(ServiceOrder.class.getSimpleName())));
+        GUI.loadMenu("control-panel/control-panel.fxml", vBox, List.of(StringUtil.addSpaces(ServiceOrder.class.getSimpleName())));
     }
 
     @FXML

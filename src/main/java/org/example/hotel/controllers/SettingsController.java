@@ -2,7 +2,7 @@ package org.example.hotel.controllers;
 
 import org.example.hotel.dao.UserDAO;
 import org.example.hotel.models.User;
-import org.example.hotel.utils.Util;
+import org.example.hotel.utils.DatabaseUtil;
 import org.example.hotel.utils.Validator;
 import org.example.hotel.utils.HotkeyHandler;
 import org.example.hotel.utils.gui.Message;
@@ -69,14 +69,14 @@ public class SettingsController {
         boolean modified = false;
         User updatedUser = new User(user);
 
-        modified |= Util.updateValue(firstNameField, updatedUser::setFirstName);
-        modified |= Util.updateValue(lastNameField, updatedUser::setLastName);
-        modified |= Util.updateValue(emailField, updatedUser::setEmail);
-        modified |= Util.updateValue(phoneNumField, updatedUser::setPhoneNum);
-        modified |= Util.updateValue(passportNumField, updatedUser::setPassportNum);
-        modified |= Util.updateValue(positionField, updatedUser::setPosition);
-        modified |= Util.updateValue(salaryField, salary -> updatedUser.setSalary(Double.parseDouble(salary)));
-        modified |= Util.updateValue(passwordField, updatedUser::setPassword);
+        modified |= DatabaseUtil.updateValue(firstNameField.getText(), updatedUser::setFirstName);
+        modified |= DatabaseUtil.updateValue(lastNameField.getText(), updatedUser::setLastName);
+        modified |= DatabaseUtil.updateValue(emailField.getText(), updatedUser::setEmail);
+        modified |= DatabaseUtil.updateValue(phoneNumField.getText(), updatedUser::setPhoneNum);
+        modified |= DatabaseUtil.updateValue(passportNumField.getText(), updatedUser::setPassportNum);
+        modified |= DatabaseUtil.updateValue(positionField.getText(), updatedUser::setPosition);
+        modified |= DatabaseUtil.updateValue(salaryField.getText(), salary -> updatedUser.setSalary(Double.parseDouble(salary)));
+        modified |= DatabaseUtil.updateValue(passwordField.getText(), updatedUser::setPassword);
 
         if (modified) {
             updatedUser.setUpdatedAt(new Date());

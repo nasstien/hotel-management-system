@@ -42,7 +42,7 @@ public class GetOnePageController implements EntityController {
 
         headingLabel.setText(STR."Get \{this.entity}");
         idField.setPromptText(STR."\{this.entity} ID");
-        idField.getItems().addAll(Util.getIds(this.entity));
+        idField.getItems().addAll(DatabaseUtil.getIds(this.entity));
     }
 
     @FXML
@@ -83,7 +83,7 @@ public class GetOnePageController implements EntityController {
                 STR."Email: \{user.getEmail()}",
                 STR."Phone Number: \{user.getPhoneNum()}",
                 STR."Passport Number: \{user.getPassportNum()}",
-                STR."Role: \{Util.capitalize(user.getRole().name().toLowerCase())}",
+                STR."Role: \{StringUtil.capitalize(user.getRole().name().toLowerCase())}",
                 STR."Position: \{user.getPosition()}",
                 STR."Salary: \{user.getSalary()} UAH per month",
                 STR."Created: \{user.getCreatedAt()}",
@@ -160,7 +160,7 @@ public class GetOnePageController implements EntityController {
                 STR."Total Sum: \{payment.getTotalSum()} UAH",
                 STR."Room Charges: \{payment.getRoomCharges()} UAH",
                 STR."Service Charges: \{payment.getServiceCharges()} UAH",
-                STR."Payment Method: \{Util.capitalize(payment.getPaymentMethod().name().toLowerCase())}",
+                STR."Payment Method: \{StringUtil.capitalize(payment.getPaymentMethod().name().toLowerCase())}",
                 STR."Status: \{payment.getPaid() ? "Payment has been made" : "Payment has not been made"}",
                 STR."Created: \{payment.getCreatedAt()}",
                 STR."Updated: \{payment.getUpdatedAt()}"

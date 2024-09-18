@@ -1,7 +1,7 @@
 package org.example.hotel.dao;
 
 import org.example.hotel.models.Service;
-import org.example.hotel.utils.Util;
+import org.example.hotel.utils.DateUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,8 +41,8 @@ public class ServiceDAO extends BaseDAO<Service> {
                     resultSet.getString("name"),
                     resultSet.getString("description"),
                     resultSet.getString("category"),
-                    Util.parseTime(resultSet.getTime("start_time")),
-                    Util.parseTime(resultSet.getTime("end_time")),
+                    DateUtil.parseTime(resultSet.getTime("start_time")),
+                    DateUtil.parseTime(resultSet.getTime("end_time")),
                     resultSet.getDouble("price"),
                     resultSet.getBoolean("available"),
                     resultSet.getDate("created_at"),

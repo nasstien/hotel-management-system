@@ -37,7 +37,7 @@ public class DeletePageController implements EntityController {
 
         headingLabel.setText(STR."Delete \{this.entity}");
         idField.setPromptText(STR."\{this.entity} ID");
-        idField.getItems().addAll(Util.getIds(this.entity));
+        idField.getItems().addAll(DatabaseUtil.getIds(this.entity));
     }
 
     @FXML

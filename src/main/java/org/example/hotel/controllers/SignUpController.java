@@ -80,7 +80,7 @@ public class SignUpController {
                 defaultRole,
                 positionField.getText(),
                 defaultSalary,
-                Util.hashPassword(passwordField.getText()),
+                DatabaseUtil.hashPassword(passwordField.getText()),
                 new Date(),
                 new Date()
         );

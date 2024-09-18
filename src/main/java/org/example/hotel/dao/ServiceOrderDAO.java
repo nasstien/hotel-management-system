@@ -1,7 +1,7 @@
 package org.example.hotel.dao;
 
 import org.example.hotel.models.ServiceOrder;
-import org.example.hotel.utils.Util;
+import org.example.hotel.utils.DateUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +36,7 @@ public class ServiceOrderDAO extends BaseDAO<ServiceOrder> {
                     new ServiceDAO().getOne(resultSet.getInt("service_id")),
                     new BookingDAO().getOne(resultSet.getInt("booking_id")),
                     new PaymentDAO().getOne(resultSet.getInt("payment_id")),
-                    Util.parseTime(resultSet.getTime("service_time")),
+                    DateUtil.parseTime(resultSet.getTime("service_time")),
                     resultSet.getDate("service_date"),
                     resultSet.getDate("created_at"),
                     resultSet.getDate("updated_at")

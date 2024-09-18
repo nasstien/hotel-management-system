@@ -1,7 +1,7 @@
 package org.example.hotel.models;
 
 import org.example.hotel.enums.Role;
-import org.example.hotel.utils.Util;
+import org.example.hotel.utils.DatabaseUtil;
 
 import java.util.Date;
 
@@ -67,6 +67,6 @@ public class User extends Person {
     }
 
     public void setPassword(String password) {
-        this.password = Util.hashPassword(password);
+        this.password = DatabaseUtil.hashPassword(password);
     }
 }

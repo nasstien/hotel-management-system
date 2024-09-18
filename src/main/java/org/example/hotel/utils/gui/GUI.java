@@ -3,7 +3,7 @@ package org.example.hotel.utils.gui;
 import org.example.hotel.dao.*;
 import org.example.hotel.models.*;
 import org.example.hotel.interfaces.EntityController;
-import org.example.hotel.utils.Util;
+import org.example.hotel.utils.StringUtil;
 
 import javafx.scene.control.*;
 import javafx.scene.Scene;
@@ -166,11 +166,11 @@ public class GUI {
         handlers.put(User.class.getSimpleName(), handleUsers);
         handlers.put(Guest.class.getSimpleName(), handleGuests);
         handlers.put(Room.class.getSimpleName(), handleRooms);
-        handlers.put(Util.addSpaces(RoomType.class.getSimpleName()), handleRoomTypes);
+        handlers.put(StringUtil.addSpaces(RoomType.class.getSimpleName()), handleRoomTypes);
         handlers.put(Booking.class.getSimpleName(), handleBookings);
         handlers.put(Payment.class.getSimpleName(), handlePayments);
         handlers.put(Service.class.getSimpleName(), handleServices);
-        handlers.put(Util.addSpaces(ServiceOrder.class.getSimpleName()), handleOrderedServices);
+        handlers.put(StringUtil.addSpaces(ServiceOrder.class.getSimpleName()), handleOrderedServices);
     }
 
     public static void initializeComboBoxes(Parent root) {
@@ -181,8 +181,8 @@ public class GUI {
             put("#paymentIdField", () -> new PaymentDAO().getIds());
             put("#bookingIdField", () -> new BookingDAO().getIds());
             put("#serviceIdField", () -> new ServiceDAO().getIds());
-            put("#roleField", Util::getUserRoles);
-            put("#paymentMethodField", Util::getPaymentMethods);
+            put("#roleField", StringUtil::getUserRoles);
+            put("#paymentMethodField", StringUtil::getPaymentMethods);
         }};
 
         data.forEach((id, action) -> populateComboBox(root, id, action));

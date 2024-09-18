@@ -1,7 +1,7 @@
 package org.example.hotel.dao;
 
 import org.example.hotel.interfaces.DAO;
-import org.example.hotel.utils.Util;
+import org.example.hotel.utils.StringUtil;
 
 import java.sql.ResultSet;
 
@@ -39,7 +39,7 @@ public abstract class BaseDAO<T> implements DAO<T> {
     public int getId(T t) {
         String separator = " = ? AND ";
         int trimLength = separator.length() - separator.indexOf('A');
-        String keys = Util.joinStrings(separator, getColumnNames(), trimLength);
+        String keys = StringUtil.joinStrings(separator, getColumnNames(), trimLength);
         String sql = STR."SELECT id FROM \{getTableName()} " +
                      STR."WHERE \{keys}";
         List<Object> params = getParams(t);
@@ -58,8 +58,8 @@ public abstract class BaseDAO<T> implements DAO<T> {
     @Override
     public void insert(T t) {
         String separator = ", ";
-        String keys = Util.joinStrings(separator, getColumnNames(), separator.length());
-        String placeholders = Util.joinStrings(separator, Collections.nCopies(getColumnNames().size(), "?"), separator.length());
+        String keys = StringUtil.joinStrings(separator, getColumnNames(), separator.length());
+        String placeholders = StringUtil.joinStrings(separator, Collections.nCopies(getColumnNames().size(), "?"), separator.length());
         String sql = STR."INSERT INTO \{getTableName()} (\{keys}) " +
                      STR."VALUES (\{placeholders})";
         List<Object> params = getParams(t);
@@ -70,7 +70,7 @@ public abstract class BaseDAO<T> implements DAO<T> {
     public void update(int id, T t) {
         String separator = " = ?, ";
         int trimLength = separator.length() - separator.indexOf(',');
-        String keys = Util.joinStrings(separator, getColumnNames(), trimLength);
+        String keys = StringUtil.joinStrings(separator, getColumnNames(), trimLength);
         String sql = STR."UPDATE \{getTableName()} " +
                      STR."SET \{keys} " +
                      STR."WHERE id = \{id}";
